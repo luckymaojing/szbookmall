@@ -3,9 +3,10 @@ import App from "./App.vue";
 import router from "./router";
 
 //引入vant
-import { DatePicker } from "ant-design-vue";
-import "ant-design-vue/dist/antd.css";
-Vue.use(DatePicker);
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+Vue.use(Vant);
 
 Vue.config.productionTip = false;
 //环境配置
