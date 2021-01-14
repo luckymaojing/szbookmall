@@ -33,19 +33,20 @@ export default {
   width: 100%;
   height: vw(76);
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
-  padding: vw(20) vw(10) 0;
+  padding: vw(20) 0;
   .logo {
     width: vw(68);
     height: vw(32);
+    margin-left: vw(40);
     img {
       width: 100%;
       height: 100%;
     }
   }
   .van-search {
-    width: 80%;
+    width: 85%;
     .van-cell {
       align-items: center;
     }

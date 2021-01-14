@@ -55,7 +55,7 @@ export default {
         {
           id: 5,
           active: myRed,
-          inactive: home,
+          inactive: my,
           title: "我的",
         },
       ],
