@@ -20,6 +20,22 @@ const routes = [
       title: '登录页'
     },
   },
+  {
+    path: "/bookcity",
+    name: "bookcity",
+    component: () => import('../views/BookCity'),
+    meta: {
+      title: '书城页'
+    },
+  },
+  {
+    path: "/bookcitysearch",
+    name: "bookcitysearch",
+    component: () => import('../views/BookcitySearch'),
+    meta: {
+      title: '书城页'
+    },
+  },
 ];
 
 const router = new VueRouter({
