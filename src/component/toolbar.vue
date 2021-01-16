@@ -2,7 +2,7 @@
   <div id="toolbar">
     <!-- 底部 -->
     <van-tabbar v-model="active" active-color="#DA251c" inactive-color="#000">
-      <van-tabbar-item v-for="item in icon" :key="item.id">
+      <van-tabbar-item v-for="item in icon" :key="item.title">
         <span>{{ item.title }}</span>
         <template #icon="props">
           <img :src="props.active ? item.active : item.inactive" />

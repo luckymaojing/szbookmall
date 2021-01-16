@@ -36,6 +36,8 @@ export default {
   justify-content: space-around;
   align-items: center;
   padding: vw(20) 0;
+  position: relative;
+  background: white;
   .logo {
     width: vw(68);
     height: vw(32);

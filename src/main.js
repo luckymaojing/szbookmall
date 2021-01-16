@@ -6,9 +6,10 @@ import router from "./router";
 import Vant from 'vant';
 import 'vant/lib/index.css';
 
+import { Lazyload } from "vant";
+Vue.use(Lazyload);
 Vue.use(Vant);
 
-Vue.config.productionTip = false;
 //环境配置
 Vue.config.productionTip = process.env.NODE_ENV === "production";
 
