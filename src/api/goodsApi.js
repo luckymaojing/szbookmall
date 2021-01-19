@@ -2,13 +2,18 @@
 let request = require("../utils/axios");
 
 // 获取商品数据
-function getdata(page,pagesize){
+function getdata(page,pagesize,query){
     return request.get("/good/goodlist",{
         params:{
             page,
-            pagesize
+            pagesize:pagesize,
+            query,
         }
     })
+}
+// 添加
+function adduser(){
+    
 }
 
 // 查询新品尝鲜的商品

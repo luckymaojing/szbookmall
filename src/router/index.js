@@ -36,6 +36,22 @@ const routes = [
       title: '书城页'
     },
   },
+  {
+    path: "/detail",
+    name: "detail",
+    component: () => import('../views/Detail'),
+    meta: {
+      title: '详情页'
+    },
+  },
+  {
+    path: "/list",
+    name: "list",
+    component: () => import('../views/List'),
+    meta: {
+      title: '列表页'
+    },
+  },
 ];
 
 const router = new VueRouter({

@@ -4,7 +4,7 @@
       <div class="inner">
         <search></search>
         <!-- title部分 -->
-        <van-tabs v-model="active">
+        <van-tabs v-model="active" @click="gotolist">
           <van-tab
             :title="item.title"
             v-for="(item, index) in titles"
@@ -19,7 +19,7 @@
       <van-swipe :autoplay="3000">
         <van-swipe-item v-for="(image, index) in images" :key="index">
           <img
-            v-lazy="image"
+            v-lazy="image ? image : defaultimg"
             width="100%"
             height="168"
             style="display: block"
@@ -57,7 +57,7 @@
             :key="item._id"
             @click="forDetail(item._id)"
           >
-            <img :src="item.s_imgUrl" alt="" />
+            <img :src="item.s_imgUrl ? item.s_imgUrl : defaultimg" alt="" />
             <p class="title">{{ item.s_name }}</p>
             <p class="price">
               <span class="newprice" style="color: red"
@@ -85,7 +85,7 @@
             :key="item._id"
             @click="forDetail(item._id)"
           >
-            <img :src="item.s_imgUrl" alt="" />
+            <img :src="item.s_imgUrl ? item.s_imgUrl : defaultimg" alt="" />
             <p class="title">{{ item.s_name }}</p>
             <p class="price">
               <span class="newprice" style="color: red"
@@ -113,7 +113,7 @@
             :key="item._id"
             @click="forDetail(item._id)"
           >
-            <img :src="item.s_imgUrl" alt="" />
+            <img :src="item.s_imgUrl ? item.s_imgUrl : defaultimg" alt="" />
             <p class="title">{{ item.s_name }}</p>
             <p class="price">
               <span class="newprice" style="color: red"
@@ -137,7 +137,7 @@
         <p class="new"><span>精选原版图书</span><span>更多</span></p>
         <ul>
           <li v-for="item in real" :key="item._id" @click="forDetail(item._id)">
-            <img :src="item.s_imgUrl" alt="" />
+            <img :src="item.s_imgUrl ? item.s_imgUrl : defaultimg" alt="" />
             <p class="title">{{ item.s_name }}</p>
             <p class="price">
               <span class="newprice" style="color: red"
@@ -193,7 +193,7 @@
             :key="item._id"
             @click="forDetail(item._id)"
           >
-            <img :src="item.s_imgUrl" alt="" />
+            <img :src="item.s_imgUrl ? item.s_imgUrl : defaultimg" alt="" />
             <p class="title">{{ item.s_name }}</p>
             <p class="price">
               <span class="newprice" style="color: red"
@@ -221,7 +221,7 @@
             :key="item._id"
             @click="forDetail(item._id)"
           >
-            <img :src="item.s_imgUrl" alt="" />
+            <img :src="item.s_imgUrl ? item.s_imgUrl : defaultimg" alt="" />
             <p class="title">{{ item.s_name }}</p>
             <p class="price">
               <span class="newprice" style="color: red"
@@ -249,7 +249,7 @@
             :key="item._id"
             @click="forDetail(item._id)"
           >
-            <img :src="item.s_imgUrl" alt="" />
+            <img :src="item.s_imgUrl ? item.s_imgUrl : defaultimg" alt="" />
             <p class="title">{{ item.s_name }}</p>
           </li>
         </ul>
@@ -270,7 +270,7 @@
             :key="item._id"
             @click="forDetail(item._id)"
           >
-            <img :src="item.s_imgUrl" alt="" />
+            <img :src="item.s_imgUrl ? item.s_imgUrl : defaultimg" alt="" />
             <p class="title">{{ item.s_name }}</p>
             <p class="price">
               <span class="newprice" style="color: red"
@@ -297,11 +297,13 @@ import banner4 from "../../../public/image/banner4.jpg";
 import banner5 from "../../../public/image/banner5.jpg";
 import banner6 from "../../../public/image/banner6.jpg";
 import banner7 from "../../../public/image/banner7.jpg";
+// import defaultimg from "../../../public/image/default_000.jpg";
 //引入goodsapi
 import goodsApi from "../../api/goodsApi";
 export default {
   data() {
     return {
+      props: [],
       value: "",
       active: 0,
       titles: [
@@ -329,6 +331,7 @@ export default {
       goodbook: "",
       ecnomicbook: "",
       recommandbook: "",
+      show: false,
     };
   },
 
@@ -345,13 +348,22 @@ export default {
         this.zazhi = res.data.data.filter((item) => item.f_id == 1551);
         this.real = res.data.data.filter((item) => item.f_id == 1607);
         this.tongshu = res.data.data.filter((item) => item.f_id == 135);
-        this.goodbook = (res.data.data.filter((item) => item.f_id == 1584)).slice(0,4);
+        this.goodbook = res.data.data.filter((item) => item.f_id == 1584).slice(0, 4);
         this.ecnomicbook = res.data.data.filter((item) => item.f_id == 1586);
         this.recommandbook = res.data.data.filter((item) => item.f_id == 198);
       });
     },
     // 点击跳转到详情页
-    forDetail(id) {},
+    forDetail(id) {
+      this.$router.push({ name: "/detail", query: { id: id } });
+    },
+    //点击去列表页
+    gotolist(name, title) {
+      // console.log(name);
+      if (name != 0) {
+        this.$router.push({ path: "/list", query: { name } });
+      }
+    },
   },
   created() {
     this.fetch();
@@ -382,6 +394,13 @@ export default {
   main {
     flex: 1;
     background: #f8f8f8;
+    // 轮播图
+    .van-swipe {
+      .van-swipe-item {
+        background: url(../../../public/image/default_000.jpg) no-repeat;
+        background-size: 100% 100%;
+      }
+    }
     .catg {
       width: 100%;
       display: flex;
@@ -432,6 +451,8 @@ export default {
           img {
             width: vw(180);
             height: vw(180);
+            background: url(../../../public/image/default_000.jpg) no-repeat;
+            background-size: 100%;
           }
           .title {
             margin: vw(18) 0;
@@ -445,7 +466,7 @@ export default {
           .price {
             margin: 0 0 vw(30) 0;
             font-size: 14px;
-            .oldprice{
+            .oldprice {
               text-decoration: line-through;
             }
           }
@@ -474,11 +495,11 @@ export default {
         }
       }
     }
-    .pinpai{
-      ul{
-        li{
+    .pinpai {
+      ul {
+        li {
           align-items: center;
-          img{
+          img {
             width: vw(90);
             height: vw(80);
           }
