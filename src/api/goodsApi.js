@@ -6,19 +6,25 @@ function getdata(page,pagesize,query){
     return request.get("/good/goodlist",{
         params:{
             page,
-            pagesize:pagesize,
+            pagesize,
             query,
         }
     })
 }
-// 添加
-function adduser(){
-    
+// 获取某个商品的数据
+function getidData(id){
+    return request.get('/good/goodsid/'+id,{
+        params:{
+            id
+        }
+    })
 }
 
-// 查询新品尝鲜的商品
-function getidData(id){
-    return request.get("/good/goodf/"+id)
+// 给购物车添加商品
+function addcart(id){
+    return request.post('/cart/addcart',{
+        
+    })
 }
 
 module.exports = {

@@ -38,7 +38,11 @@
     </header>
     <main>
       <ul class="notlists" v-if="showislist">
-        <li v-for="(item, index) in lists" :key="index">
+        <li
+          v-for="(item, index) in lists"
+          :key="index"
+          @click="gotodetail(item._id)"
+        >
           <img v-lazy="item.post" alt="" />
           <p class="name">{{ item.name }}</p>
           <p class="price">
@@ -52,7 +56,7 @@
         </li>
       </ul>
       <ul class="lists" v-else>
-        <li v-for="(item, index) in listdata" :key="index">
+        <li v-for="(item, index) in lists" :key="index">
           <img v-lazy="item.post" alt="" />
           <div class="desc">
             <p class="name">{{ item.name }}</p>
@@ -219,6 +223,12 @@ export default {
     },
     goto() {
       this.$router.push("/bookcity");
+    },
+    gotodetail(id) {
+      this.$router.push({
+        path: "/detail",
+        query: { id, forwardpath: this.$route.fullPath,fowardpage:'list' },
+      });
     },
   },
   created() {

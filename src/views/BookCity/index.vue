@@ -303,7 +303,6 @@ import goodsApi from "../../api/goodsApi";
 export default {
   data() {
     return {
-      props: [],
       value: "",
       active: 0,
       titles: [
@@ -348,18 +347,22 @@ export default {
         this.zazhi = res.data.data.filter((item) => item.f_id == 1551);
         this.real = res.data.data.filter((item) => item.f_id == 1607);
         this.tongshu = res.data.data.filter((item) => item.f_id == 135);
-        this.goodbook = res.data.data.filter((item) => item.f_id == 1584).slice(0, 4);
+        this.goodbook = res.data.data
+          .filter((item) => item.f_id == 1584)
+          .slice(0, 4);
         this.ecnomicbook = res.data.data.filter((item) => item.f_id == 1586);
         this.recommandbook = res.data.data.filter((item) => item.f_id == 198);
       });
     },
     // 点击跳转到详情页
     forDetail(id) {
-      this.$router.push({ name: "/detail", query: { id: id } });
+      this.$router.push({
+        path: "/detail",
+        query: { id, forwardpath: this.$route.fullPath,fowardpage:'bookcity' },
+      });
     },
     //点击去列表页
     gotolist(name, title) {
-      // console.log(name);
       if (name != 0) {
         this.$router.push({ path: "/list", query: { name } });
       }
