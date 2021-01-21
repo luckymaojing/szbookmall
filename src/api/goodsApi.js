@@ -21,13 +21,16 @@ function getidData(id){
 }
 
 // 给购物车添加商品
-function addcart(id){
+function addcart(username,bookname,num=1){
     return request.post('/cart/addcart',{
-        
+        username,
+        bookname,
+        num,
     })
 }
 
 module.exports = {
     getdata,
-    getidData
+    getidData,
+    addcart,
 }

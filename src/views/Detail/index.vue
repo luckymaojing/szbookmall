@@ -8,7 +8,7 @@
       <span><van-icon name="arrow-left" @click="goback" /></span
       ><span><van-icon name="cart-o" /></span>
     </header>
-    <main v-for="(item, index) in goods ? goods : lists" :key="index">
+    <main v-for="(item, index) in goods" :key="index">
       <img :src="item.s_imgUrl ? item.s_imgUrl : item.post" alt="" class="bg" />
       <div class="priceAnddescrib container">
         <div class="pricearea">
@@ -101,7 +101,7 @@
     </main>
     <footer>
       <a><van-icon name="service-o" /><span>客服</span></a>
-      <a><van-icon name="like" /></a>
+      <a><van-icon name="like" ref="lovecolor" @click="changecolor" /></a>
       <a class="buynow" @click="tocart">立即购买</a>
       <a class="addtocart" @click="addcart">加入购物车</a>
     </footer>
@@ -116,9 +116,9 @@ export default {
       active: 2,
       goods: "", //显示来自bookcity页的数据
       goodsale: "",
-      lists: "", //显示来自list页的数据
       show: true,
       navTab: true,
+      color: false,
     };
   },
 
@@ -140,7 +140,7 @@ export default {
           this.goods = res.data.data;
         });
       } else if (this.$route.query.fowardpage == "list") {
-        this.lists = JSON.parse(localStorage.getItem("lists")).filter(
+        this.goods = JSON.parse(localStorage.getItem("lists")).filter(
           (item) => item._id == goodid
         );
       }
@@ -178,7 +178,24 @@ export default {
     },
     // 商品加入购物车
     addcart() {
-      this.$route.query.id
+      let adddata = this.goods.filter((item) => item._id == this.$route.id);
+      let result = adddata.f_name ? adddata.f_name : adddata.name;
+      // let username = localStorage.getItem("username");
+      goodsApi.addcart("张三", result).then((res) => {
+        this.$toast({
+          message: "你的宝贝已经在购物车等你了哟！",
+          icon: "like-o",
+        });
+      });
+    },
+    changecolor() {
+      this.color=!this.color;
+      if (this.color) {
+        this.$refs.lovecolor.style.color = "#DA251C";
+        this.$toast('宝贝已收藏！')
+      }else{
+        this.$refs.lovecolor.style.color = "#ccc";
+      }
     },
   },
   created() {

@@ -13,11 +13,11 @@ const routes = [
     },
   },
   {
-    path: "/reg",
-    name: "reg",
-    component: () => import('../views/Reg'),
+    path: "/my",
+    name: "my",
+    component: () => import('../views/My'),
     meta: {
-      title: '登录页'
+      title: '我的页'
     },
   },
   {
