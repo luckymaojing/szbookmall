@@ -1,8 +1,8 @@
 <template>
   <div id="toolbar">
     <!-- 底部 -->
-    <van-tabbar v-model="active" active-color="#DA251c" inactive-color="#000">
-      <van-tabbar-item v-for="item in icon" :key="item.id" @click="goto(item.path)">
+    <van-tabbar v-model="active" active-color="#DA251c" inactive-color="#000" :route="true" @change="goto">
+      <van-tabbar-item v-for="(item,idx) in icon" :key="item.id" :to="item.path" :name="idx">
         <span>{{ item.title }}</span>
         <template #icon="props">
           <img :src="props.active ? item.active : item.inactive" />
@@ -71,8 +71,8 @@ export default {
   components: {},
 
   methods: {
-    goto(path){
-      this.$router.push(path);
+    goto(idx){
+      this.active = idx;
     }
   },
 };

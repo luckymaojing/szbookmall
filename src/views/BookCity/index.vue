@@ -331,6 +331,7 @@ export default {
       ecnomicbook: "",
       recommandbook: "",
       show: false,
+      flag: true,
     };
   },
 
@@ -341,24 +342,30 @@ export default {
 
   methods: {
     fetch() {
-      goodsApi.getdata(3, 150).then((res) => {
-        this.newtast = res.data.data.filter((item) => item.f_id == 556);
-        this.goodsale = res.data.data.filter((item) => item.f_id == 557);
-        this.zazhi = res.data.data.filter((item) => item.f_id == 1551);
-        this.real = res.data.data.filter((item) => item.f_id == 1607);
-        this.tongshu = res.data.data.filter((item) => item.f_id == 135);
-        this.goodbook = res.data.data
-          .filter((item) => item.f_id == 1584)
-          .slice(0, 4);
-        this.ecnomicbook = res.data.data.filter((item) => item.f_id == 1586);
-        this.recommandbook = res.data.data.filter((item) => item.f_id == 198);
-      });
+      if (this.flag) {
+        goodsApi.getdata(3, 150).then((res) => {
+          this.newtast = res.data.data.filter((item) => item.f_id == 556);
+          this.goodsale = res.data.data.filter((item) => item.f_id == 557);
+          this.zazhi = res.data.data.filter((item) => item.f_id == 1551);
+          this.real = res.data.data.filter((item) => item.f_id == 1607);
+          this.tongshu = res.data.data.filter((item) => item.f_id == 135);
+          this.goodbook = res.data.data
+            .filter((item) => item.f_id == 1584)
+            .slice(0, 4);
+          this.ecnomicbook = res.data.data.filter((item) => item.f_id == 1586);
+          this.recommandbook = res.data.data.filter((item) => item.f_id == 198);
+        });
+      }
     },
     // 点击跳转到详情页
     forDetail(id) {
       this.$router.push({
         path: "/detail",
-        query: { id, forwardpath: this.$route.fullPath,fowardpage:'bookcity' },
+        query: {
+          id,
+          forwardpath: this.$route.fullPath,
+          fowardpage: "bookcity",
+        },
       });
     },
     //点击去列表页
@@ -370,6 +377,10 @@ export default {
   },
   created() {
     this.fetch();
+  },
+  beforeRouteLeave(to, from, next) {
+    this.flag = false;
+    next();
   },
 };
 </script>

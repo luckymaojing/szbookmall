@@ -6,11 +6,22 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "home",
     redirect: '/home',
+  },
+  {
+    path: "/home",
+    name: "home",
     component: () => import('../views/Home'),
     meta: {
       title: '首页'
+    },
+  },
+  {
+    path: "/category",
+    name: "category",
+    component: () => import('../views/Category'),
+    meta: {
+      title: '分类页'
     },
   },
   {

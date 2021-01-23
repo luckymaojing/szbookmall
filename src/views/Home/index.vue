@@ -1,5 +1,6 @@
 <template>
   <div id="home">
+      首页
     <toolbar></toolbar>
   </div>
 </template>
@@ -22,6 +23,8 @@ export default {
       this.show = !this.show;
     },
   },
+  created(){
+  }
 };
 </script>
 
@@ -30,6 +33,6 @@ export default {
   @return ($px/750) * 100vw;
 }
 #home{
-    height: 100%;
+    height: vw(40);
 }
 </style>
