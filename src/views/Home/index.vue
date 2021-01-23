@@ -1,28 +1,35 @@
 <template>
- <div>
- <p v-if="show">显示第一页</p>
- <p v-else>显示第二页</p>
- <button @click="dian">点我</button>
- </div>
+  <div id="home">
+    <toolbar></toolbar>
+  </div>
 </template>
 
 <script>
+import toolbar from "../../component/toolbar";
 export default {
- data () {
- return {
-     show:true
- }
- },
+  data() {
+    return {
+      show: true,
+    };
+  },
 
- components: {},
+  components: {
+    toolbar,
+  },
 
- methods: {
-     dian(){
-         this.show=!this.show
-     }
- }
-}
+  methods: {
+    dian() {
+      this.show = !this.show;
+    },
+  },
+};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@function vw($px) {
+  @return ($px/750) * 100vw;
+}
+#home{
+    height: 100%;
+}
 </style>

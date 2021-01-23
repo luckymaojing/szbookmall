@@ -2,7 +2,7 @@
   <div id="toolbar">
     <!-- 底部 -->
     <van-tabbar v-model="active" active-color="#DA251c" inactive-color="#000">
-      <van-tabbar-item v-for="item in icon" :key="item.title">
+      <van-tabbar-item v-for="item in icon" :key="item.id" @click="goto(item.path)">
         <span>{{ item.title }}</span>
         <template #icon="props">
           <img :src="props.active ? item.active : item.inactive" />
@@ -33,30 +33,35 @@ export default {
           active: homeRed,
           inactive: home,
           title: "首页",
+          path:'/home'
         },
         {
           id: 2,
           active: categoryRed,
           inactive: category,
           title: "分类",
+          path:'/category'
         },
         {
           id: 3,
           active: bookcityRed,
           inactive: bookcity,
           title: "书城",
+          path:'/bookcity'
         },
         {
           id: 4,
           active: shopcartRed,
           inactive: shopcart,
           title: "购物车",
+          path:'/cart'
         },
         {
           id: 5,
           active: myRed,
           inactive: my,
           title: "我的",
+          path:'/my'
         },
       ],
       active: 0,
@@ -65,7 +70,11 @@ export default {
 
   components: {},
 
-  methods: {},
+  methods: {
+    goto(path){
+      this.$router.push(path);
+    }
+  },
 };
 </script>
 

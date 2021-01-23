@@ -7,6 +7,7 @@ const routes = [
   {
     path: "/",
     name: "home",
+    redirect: '/home',
     component: () => import('../views/Home'),
     meta: {
       title: '首页'
@@ -18,6 +19,30 @@ const routes = [
     component: () => import('../views/My'),
     meta: {
       title: '我的页'
+    },
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import('../views/Login'),
+    meta: {
+      title: '登录页'
+    },
+  },
+  {
+    path: "/setpsw",
+    name: "setpsw",
+    component: () => import('../views/setpsw'),
+    meta: {
+      title: '设置密码页'
+    },
+  },
+  {
+    path: "/quit",
+    name: "quit",
+    component: () => import('../views/Quit'),
+    meta: {
+      title: '设置密码页'
     },
   },
   {
