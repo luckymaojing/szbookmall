@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import userApi from "../../api/userApi";
+import CryptoJS from "crypto-js";
 export default {
   data() {
     return {
@@ -88,10 +90,21 @@ export default {
         this.checked &&
         testpsw.test(this.password)
       ) {
+        const mypassword = CryptoJS.SHA256(this.password).toString();
         // 发送请求验证用户名和密码是否存在
-        // 设置用户名和token到本地
-        // localStorage.setItem("uid", JSON.stringify(this.phone));
-        // this.$router.push("/home");
+        userApi.login(this.phone, mypassword).then((res) => {
+          if (res.data.code === 3000) {
+            this.$toast({
+              message: "用户名或密码错误！",
+            });
+            this.phone = "";
+            this.password = "";
+            return;
+          }
+          // 设置用户名和token到本地
+          localStorage.setItem("uid", JSON.stringify(this.phone));
+          this.$router.push("/my");
+        });
       } else if (!testphone.test(this.phone)) {
         this.$toast({
           message: "手机号格式有误，请重填",
