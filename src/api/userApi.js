@@ -31,7 +31,7 @@ function reg(username, password, usertype) {
 
 // 登录
 function login(username, password) {
-  return request.get("/user/login", {
+  return request.post("/user/login", {
     username,
     password,
   });
