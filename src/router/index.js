@@ -88,6 +88,14 @@ const routes = [
       title: '列表页'
     },
   },
+  {
+    path: "/cart",
+    name: "cart",
+    component: () => import('../views/cart'),
+    meta: {
+      title: '购物车页'
+    },
+  },
 ];
 
 const router = new VueRouter({
